@@ -1,0 +1,5 @@
+mysql_db: wordpress
+mysql_user: adminbdd
+mysql_password: passwordbdd
+mysql_host: 192.168.56.50
+mysql_socket: /var/run/mysqld/mysqld.sock

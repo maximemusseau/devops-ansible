@@ -1,0 +1,39 @@
+- name: Update server
+  apt:
+   upgrade: yes
+   update_cache: yes
+
+- name: Install MySQL and its dependecies
+  apt: name={{ item }}
+  with_items:
+    - mysql-server
+    - python-mysqldb
+    - python-pip
+    - python-setuptools
+
+- name: Install pymysql
+  pip: name={{ item }}
+  with_items:
+    - setuptools
+    - pymysql
+
+- name: Create 'wordpress' database
+  mysql_db:
+    login_unix_socket={{ mysql_socket }}
+    name={{ mysql_db }}
+
+- name: Create 'adminbdd' mysql user
+  mysql_user:
+    login_unix_socket={{ mysql_socket }}
+    name={{ mysql_user }}
+    password={{ mysql_password }}
+    host={{ mysql_host }}
+    priv=*.*:ALL
+
+- name: Remove bind-address to expose server
+  lineinfile:
+    path: /etc/mysql/mysql.conf.d/mysqld.cnf
+    regexp: '^bind-address'
+    line: '#bind-address'
+  notify:
+    - restart mysql

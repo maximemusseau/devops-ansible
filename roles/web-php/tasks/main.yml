@@ -1,0 +1,24 @@
+- name: Update server
+  apt:
+   upgrade: yes
+   update_cache: yes
+
+- name: Install Apache2
+  apt:
+    name: apache2
+
+- name: Allow Apache2
+  ufw:
+    rule: allow
+    name: Apache
+
+- name: Install Php
+  apt: name={{ item }}
+  with_items:
+    - php
+    - libapache2-mod-php
+    - php-mysql
+    - mariadb-client
+
+  notify:
+    - restart apache2

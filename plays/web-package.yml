@@ -1,0 +1,8 @@
+- name: install apache/php
+  hosts: web
+  gather_facts: no
+  remote_user: devops
+  become: true
+
+  roles:
+    - web-php

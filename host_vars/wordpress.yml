@@ -1,0 +1,2 @@
+ansible_host: 192.168.56.50
+ansible_become_pass: devops

@@ -1,0 +1,8 @@
+- name: Install MySQL and start MySQL
+  hosts: db
+  gather_facts: no
+  remote_user: devops
+  become: true
+
+  roles:
+    - mysql

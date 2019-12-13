@@ -1,0 +1,8 @@
+- name: install wordpress/sftp
+  hosts: web
+  gather_facts: no
+  remote_user: devops
+  become: true
+
+  roles:
+    - wordpress-sftp
