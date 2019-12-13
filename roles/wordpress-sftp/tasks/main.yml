@@ -36,7 +36,7 @@
   notify:
     - restart apache2
 
-- name: Creates /srv/app directory
+- name: Set webadmin owner of wordpress directory
   file:
     path: /srv/app/wordpress
     recurse: yes
@@ -44,7 +44,7 @@
     group: www-data
     state: directory
 
-- name: Restict SFTP directories
+- name: Restrict SFTP directories
   blockinfile:
     dest: /etc/ssh/sshd_config
     block: |
